@@ -41,13 +41,15 @@ export default function HomeScreen() {
       backgroundColor: colors.background,
     },
     sectionTitle: {
-      fontSize: 18,
-      fontWeight: '600',
+      fontSize: 20,
+      fontWeight: '700',
+      letterSpacing: -0.3,
       color: colors.text,
     },
     seeAll: {
-      fontSize: 14,
+      fontSize: 13,
       fontWeight: '600',
+      letterSpacing: 0.2,
       color: colors.primary,
     },
     actionCard: {
@@ -57,6 +59,8 @@ export default function HomeScreen() {
       padding: spacing.lg,
       alignItems: 'center',
       gap: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.border,
       ...shadows.sm,
     },
     actionCardPressed: {
@@ -75,6 +79,8 @@ export default function HomeScreen() {
       padding: spacing['3xl'],
       alignItems: 'center',
       gap: spacing.md,
+      borderWidth: 1.5,
+      borderColor: colors.primaryLight,
       ...shadows.sm,
     },
     emptyTitle: {
@@ -152,7 +158,7 @@ export default function HomeScreen() {
               style={styles.notifButton}
               onPress={() => {
                 handleHaptics();
-                navigation.navigate('FarmerTabs', { screen: 'History' } as never);
+                navigation.navigate('Notifications');
               }}
             >
               <Ionicons name="notifications-outline" size={24} color="#fff" />
@@ -164,15 +170,24 @@ export default function HomeScreen() {
 
           {/* Stats Row */}
           <View style={styles.statsRow}>
-            <View style={styles.statCard}>
+            <View style={[styles.statCard, { backgroundColor: 'rgba(255,255,255,0.12)' }]}>
+              <View style={[styles.statIconContainer, { backgroundColor: 'rgba(255,255,255,0.15)' }]}>
+                <Feather name="camera" size={18} color="#fff" />
+              </View>
               <Text style={styles.statNumber}>{diagnoses.length}</Text>
               <Text style={styles.statLabel}>Total Scans</Text>
             </View>
-            <View style={styles.statCard}>
+            <View style={[styles.statCard, { backgroundColor: 'rgba(255,255,255,0.12)' }]}>
+              <View style={[styles.statIconContainer, { backgroundColor: 'rgba(255,255,255,0.15)' }]}>
+                <Ionicons name="time-outline" size={18} color="#fff" />
+              </View>
               <Text style={styles.statNumber}>{pendingCount}</Text>
               <Text style={styles.statLabel}>Pending</Text>
             </View>
-            <View style={styles.statCard}>
+            <View style={[styles.statCard, { backgroundColor: 'rgba(255,255,255,0.12)' }]}>
+              <View style={[styles.statIconContainer, { backgroundColor: 'rgba(255,255,255,0.15)' }]}>
+                <Feather name="check-circle" size={18} color="#fff" />
+              </View>
               <Text style={styles.statNumber}>{approvedCount}</Text>
               <Text style={styles.statLabel}>Approved</Text>
             </View>
@@ -309,7 +324,7 @@ const styles = StyleSheet.create({
   // Hero Section
   heroGradient: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xl,
+    paddingBottom: spacing['2xl'],
     borderBottomLeftRadius: radius['4xl'],
     borderBottomRightRadius: radius['4xl'],
   },
@@ -320,15 +335,17 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   greeting: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '500',
-    color: 'rgba(255,255,255,0.8)',
+    color: 'rgba(255,255,255,0.75)',
     marginBottom: spacing.xs,
+    letterSpacing: 0.2,
   },
   heroTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: '700',
     color: '#fff',
+    letterSpacing: -0.5,
   },
   notifButton: {
     position: 'relative',
@@ -349,11 +366,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(255,255,255,0.15)',
     borderRadius: radius.xl,
-    padding: spacing.lg,
+    padding: spacing.md,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  statIconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: radius.lg,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '700',
     color: '#fff',
     marginBottom: spacing.xs,
@@ -385,6 +411,7 @@ const styles = StyleSheet.create({
   actionsGrid: {
     flexDirection: 'row',
     gap: spacing.md,
+    marginTop: spacing.lg,
   },
   actionIcon: {
     width: 52,
